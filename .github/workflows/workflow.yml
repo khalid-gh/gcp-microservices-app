@@ -30,10 +30,10 @@ jobs:
       - uses: terraform-linters/setup-tflint@6ffdbaa3be476b3431f7275c26966ef32ff60337 # v6.3.2
         with:
           tflint_version: latest
-      - run: tflint --init
+      - run: tflint --init --config configs/.tflint.hcl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: tflint
+      - run: tflint --config configs/.tflint.hcl
   checkov:
     runs-on: ubuntu-latest
     steps:
@@ -62,6 +62,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   zizmor:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -71,6 +74,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   megalinter:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -80,6 +87,9 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_COMMENT_REPORTER: true
+          TFLINT_CONFIG: configs/.tflint.hcl
+          SPELL_CSPELL_CONFIG_FILE: configs/.cspell.json
+          GITHUB_API_URL: https://api.github.com
   pr-title-lint:
     runs-on: ubuntu-latest
     permissions:
