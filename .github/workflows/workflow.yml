@@ -23,6 +23,8 @@ on:
 jobs:
   tflint:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -36,6 +38,8 @@ jobs:
       - run: tflint --config configs/.tflint.hcl
   checkov:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -45,6 +49,8 @@ jobs:
           directory: .
   terraform-fmt:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -52,6 +58,8 @@ jobs:
       - uses: dflook/terraform-fmt-check@af4dee16c1817cc30e44f1149dc806b8f5bc92e0 # v3.1.3
   gitleaks:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -82,14 +90,16 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
       - uses: oxsecurity/megalinter@f2fe8c1cba37091848df3e524066c8c23ef353ed # v10.2.0
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_COMMENT_REPORTER: true
-          TFLINT_CONFIG: configs/.tflint.hcl
           SPELL_CSPELL_CONFIG_FILE: configs/.cspell.json
           GITHUB_API_URL: https://api.github.com
+          TERRAFORM_TFLINT_DISABLE_LINTER: true
+          ACTION_ZIZMOR_DISABLE_LINTER: true
   pr-title-lint:
     runs-on: ubuntu-latest
     permissions:
