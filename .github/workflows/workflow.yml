@@ -98,8 +98,7 @@ jobs:
           GITHUB_COMMENT_REPORTER: true
           SPELL_CSPELL_CONFIG_FILE: configs/.cspell.json
           GITHUB_API_URL: https://api.github.com
-          TERRAFORM_TFLINT_DISABLE_LINTER: true
-          ACTION_ZIZMOR_DISABLE_LINTER: true
+          DISABLE_LINTERS: TERRAFORM_TFLINT,ACTION_ZIZMOR
   pr-title-lint:
     runs-on: ubuntu-latest
     permissions:
