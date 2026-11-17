@@ -95,7 +95,7 @@ jobs:
           DISABLE_LINTERS: TERRAFORM_TFLINT,ACTION_ZIZMOR
   pr-title-lint:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
+    if: github.event_name == 'pull_request' && !startsWith(github.head_ref, 'dependabot/')
     permissions:
       contents: read
       pull-requests: write
