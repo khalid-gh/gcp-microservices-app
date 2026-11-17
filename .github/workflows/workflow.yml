@@ -10,16 +10,10 @@ on:
     branches:
       - "main"
   workflow_dispatch:
-    inputs:
-      logLevel:
-        description: "Log level"
-        required: true
-        default: "warning"
-        type: choice
-        options:
-          - info
-          - warning
-          - debug
+
+permissions:
+  contents: read
+
 jobs:
   tflint:
     runs-on: ubuntu-latest
@@ -44,7 +38,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: bridgecrewio/checkov-action@99bb2caf247dfd9f03cf984373bc6043d4e32ebf # v12.1347.0
+      - uses: bridgecrewio/checkov-action@45edc9d8856b664db2ec251f5f8632361f0a67aa # v12.3139.0
         with:
           directory: .
   terraform-fmt:
@@ -97,10 +91,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_COMMENT_REPORTER: true
           SPELL_CSPELL_CONFIG_FILE: configs/.cspell.json
-          GITHUB_API_URL: https://api.github.com
           DISABLE_LINTERS: TERRAFORM_TFLINT,ACTION_ZIZMOR
   pr-title-lint:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && !startsWith(github.head_ref, 'dependabot/')
     permissions:
       contents: read
       pull-requests: write
