@@ -35,6 +35,16 @@ module "vpc" {
         protocol = "tcp"
         ports    = ["22"]
       }]
+    },
+    {
+      name          = "allow-cluster-bastion-proxy"
+      description   = "Allow private GKE nodes and Pods to use the repository proxy"
+      source_ranges = ["10.0.0.0/18", "10.48.0.0/14"]
+      target_tags   = ["bastion"]
+      allow = [{
+        protocol = "tcp"
+        ports    = ["3128"]
+      }]
     }
   ]
 }

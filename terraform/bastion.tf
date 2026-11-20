@@ -13,7 +13,7 @@ resource "google_compute_instance" "bastion" {
 
   network_interface {
     network    = module.vpc.network_name
-    subnetwork = "gke-demo-subnet"
+    subnetwork = module.vpc.subnets["${var.region}/gke-demo-subnet"].self_link
     access_config {} # ephemeral public IP for outbound internet access
   }
 
@@ -24,6 +24,7 @@ resource "google_compute_instance" "bastion" {
   metadata = {
     enable-oslogin         = "TRUE"
     block-project-ssh-keys = "TRUE"
+    startup-script         = file("${path.module}/../scripts/bastion-proxy.sh")
   }
 
   service_account {
