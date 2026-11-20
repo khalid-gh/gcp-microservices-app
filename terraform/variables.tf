@@ -13,6 +13,7 @@ variable "services" {
   type        = set(string)
   description = "Google APIs to enable"
   default = [
+    "artifactregistry.googleapis.com",
     "compute.googleapis.com",
     "container.googleapis.com"
   ]

@@ -1,0 +1,2 @@
+# Kubernetes API address is only reachable inside the cluster
+^https://kubernetes\.default\.svc/?$

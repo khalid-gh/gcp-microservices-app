@@ -26,10 +26,12 @@ jobs:
       - uses: terraform-linters/setup-tflint@6ffdbaa3be476b3431f7275c26966ef32ff60337 # v6.3.2
         with:
           tflint_version: latest
-      - run: tflint --init --config configs/.tflint.hcl
+      - run: tflint --init --config ../configs/.tflint.hcl
+        working-directory: terraform
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: tflint --config configs/.tflint.hcl
+      - run: tflint --config ../configs/.tflint.hcl
+        working-directory: terraform
   checkov:
     runs-on: ubuntu-latest
     permissions:
@@ -51,6 +53,8 @@ jobs:
         with:
           persist-credentials: false
       - uses: dflook/terraform-fmt-check@af4dee16c1817cc30e44f1149dc806b8f5bc92e0 # v3.1.3
+        with:
+          path: terraform
   gitleaks:
     runs-on: ubuntu-latest
     permissions:
@@ -91,9 +95,9 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_COMMENT_REPORTER: true
-          SPELL_CSPELL_CONFIG_FILE: configs/.cspell.json
+          SPELL_LYCHEE_ARGUMENTS: --exclude-file configs/.lycheeignore
           REPOSITORY_CHECKOV_ARGUMENTS: --config-file configs/.checkov.yml
-          DISABLE_LINTERS: TERRAFORM_TFLINT,ACTION_ZIZMOR,REPOSITORY_TRIVY
+          DISABLE_LINTERS: TERRAFORM_TFLINT,ACTION_ZIZMOR,REPOSITORY_TRIVY,SPELL_CSPELL
   pr-title-lint:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && !startsWith(github.head_ref, 'dependabot/')

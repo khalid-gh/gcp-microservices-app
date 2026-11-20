@@ -18,10 +18,10 @@ module "gke" {
   node_pools = [
     {
       name         = "default-node-pool"
-      machine_type = "e2-medium"
+      machine_type = "e2-standard-2"
       spot         = true
       min_count    = 1
-      max_count    = 2
+      max_count    = 3
       disk_size_gb = 30
       disk_type    = "pd-standard"
       auto_repair  = true
@@ -31,6 +31,7 @@ module "gke" {
 
   node_pools_oauth_scopes = {
     all = [
+      "https://www.googleapis.com/auth/devstorage.read_only",
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/monitoring",
     ]
