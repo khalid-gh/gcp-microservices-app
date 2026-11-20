@@ -7,7 +7,7 @@ apt-get install -y squid skopeo
 
 internal_ip=$(curl --fail --silent --show-error \
   -H "Metadata-Flavor: Google" \
-  http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip)
+  http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip) # DevSkim: ignore DS137138 -- GCE local metadata endpoint uses HTTP
 
 cat > /etc/squid/squid.conf <<EOF
 http_port $internal_ip:3128
