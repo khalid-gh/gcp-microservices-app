@@ -1,5 +1,5 @@
 module "vpc" {
-  source       = "github.com/terraform-google-modules/terraform-google-network?ref=v18.3.1"
+  source       = "github.com/terraform-google-modules/terraform-google-network?ref=91352bed3014ddbfb323d979b6413a90e7253acf" # v18.3.1
   project_id   = var.project_id
   network_name = "gke-demo-vpc"
 

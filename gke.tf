@@ -1,5 +1,5 @@
 module "gke" {
-  source                     = "github.com/terraform-google-modules/terraform-google-kubernetes-engine//modules/private-cluster?ref=v47.0.0"
+  source                     = "github.com/terraform-google-modules/terraform-google-kubernetes-engine//modules/private-cluster?ref=a19597ac18ad833d224448e2954df93095b8ce9d" # v47.0.0
   project_id                 = var.project_id
   name                       = "demo-cluster"
   regional                   = false
