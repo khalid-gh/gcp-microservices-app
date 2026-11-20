@@ -14,7 +14,7 @@ resource "google_compute_instance" "bastion" {
   network_interface {
     network    = module.vpc.network_name
     subnetwork = "gke-demo-subnet"
-    access_config {} # ephemeral public IP
+    access_config {} # ephemeral public IP for outbound internet access
   }
 
   shielded_instance_config {
@@ -22,7 +22,8 @@ resource "google_compute_instance" "bastion" {
   }
 
   metadata = {
-    enable-oslogin = "TRUE"
+    enable-oslogin         = "TRUE"
+    block-project-ssh-keys = "TRUE"
   }
 
   service_account {
