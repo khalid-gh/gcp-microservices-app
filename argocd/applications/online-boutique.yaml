@@ -16,7 +16,7 @@ spec:
       helm:
         releaseName: online-boutique
         valueFiles:
-          - $values/argo-cd/values/online-boutique.yaml
+          - $values/argocd/values/online-boutique.yaml
     - repoURL: https://github.com/khalid-gh/gcp-microservices-demo.git
       targetRevision: main
       ref: values
