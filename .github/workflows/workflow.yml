@@ -92,8 +92,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_COMMENT_REPORTER: true
           SPELL_CSPELL_CONFIG_FILE: configs/.cspell.json
-          TERRAFORM_CHECKOV_ARGUMENTS: --config-file configs/.checkov.yml
-          DISABLE_LINTERS: TERRAFORM_TFLINT,ACTION_ZIZMOR
+          REPOSITORY_CHECKOV_ARGUMENTS: --config-file configs/.checkov.yml
+          DISABLE_LINTERS: TERRAFORM_TFLINT,ACTION_ZIZMOR,TRIVY
   pr-title-lint:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && !startsWith(github.head_ref, 'dependabot/')
