@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: online-boutique
-  namespace: argocd
+  namespace: argo-cd
 spec:
   project: default
   destination:
@@ -16,7 +16,7 @@ spec:
       helm:
         releaseName: online-boutique
         valueFiles:
-          - $values/argocd/values/online-boutique.yaml
+          - $values/argo-cd/values/online-boutique.yaml
     - repoURL: https://github.com/khalid-gh/gcp-microservices-app.git
       targetRevision: main
       ref: values
