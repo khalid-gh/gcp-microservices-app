@@ -1,0 +1,8 @@
+---
+skip-check:
+  # Bastion disks use Google-managed encryption rather than customer-supplied keys
+  - CKV_GCP_38
+  # The bastion retains a public IP for outbound internet access; SSH uses IAP
+  - CKV_GCP_40
+  # Access logging is intentionally disabled for the demo Terraform state bucket
+  - CKV_GCP_62
