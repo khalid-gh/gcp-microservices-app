@@ -7,4 +7,4 @@
 [![Helm](https://img.shields.io/badge/Helm-0F1689?logo=helm&logoColor=fff)](https://helm.sh/docs/)
 [![Argo CD](https://img.shields.io/badge/Argo%20CD-EF7B4D?logo=argo&logoColor=white)](https://argo-cd.readthedocs.io/)
 
-Deploying Google Cloud's [Online Boutique microservices demo](https://github.com/googlecloudplatform/microservices-demo) on GKE with Terraform and Helm.
+Deploying Google Cloud's [Online Boutique microservices demo](https://github.com/googlecloudplatform/microservices-demo) on GKE with Terraform, Helm, and Argo CD.
