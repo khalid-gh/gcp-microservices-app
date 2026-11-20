@@ -95,6 +95,7 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_COMMENT_REPORTER: true
+          SPELL_LYCHEE_ARGUMENTS: --exclude-file configs/.lycheeignore
           REPOSITORY_CHECKOV_ARGUMENTS: --config-file configs/.checkov.yml
           DISABLE_LINTERS: TERRAFORM_TFLINT,ACTION_ZIZMOR,REPOSITORY_TRIVY,SPELL_CSPELL
   pr-title-lint:
