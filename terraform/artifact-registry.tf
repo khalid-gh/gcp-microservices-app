@@ -7,8 +7,8 @@ resource "google_artifact_registry_repository" "gke-demo-images" {
 }
 
 resource "google_artifact_registry_repository_iam_member" "node-reader" {
-  project    = google_artifact_registry_repository.gke-demo-images.project
-  location   = google_artifact_registry_repository.gke-demo-images.location
+  project    = var.project_id
+  location   = var.region
   repository = google_artifact_registry_repository.gke-demo-images.name
   role       = "roles/artifactregistry.reader"
   member     = "serviceAccount:${module.gke.service_account}"
