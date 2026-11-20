@@ -11,6 +11,7 @@
     "zizmorcore",
     "checkov",
     "gitleaks",
-    "megalinter"
+    "megalinter",
+    "oslogin"
   ]
 }
