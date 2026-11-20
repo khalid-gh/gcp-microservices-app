@@ -63,7 +63,7 @@ resource "helm_release" "argo-cd" {
         }
       }
       extraObjects = [
-        yamldecode(file("${path.module}/../argo-cd/applications/online-boutique.yaml"))
+        yamldecode(file("${path.module}/../argocd/applications/online-boutique.yaml"))
       ]
     })
   ]
