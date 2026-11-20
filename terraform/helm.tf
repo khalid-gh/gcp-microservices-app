@@ -1,9 +1,9 @@
-resource "helm_release" "argocd" {
-  name             = "argocd"
+resource "helm_release" "argo-cd" {
+  name             = "argo-cd"
   repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
   version          = "10.18.2"
-  namespace        = "argocd"
+  namespace        = "argo-cd"
   create_namespace = true
   atomic           = true
   timeout          = 600
@@ -12,7 +12,7 @@ resource "helm_release" "argocd" {
     yamlencode({
       global = {
         image = {
-          repository = "${var.region}-docker.pkg.dev/${var.project_id}/${google_artifact_registry_repository.gke-demo-images.repository_id}/argocd"
+          repository = "${var.region}-docker.pkg.dev/${var.project_id}/${google_artifact_registry_repository.gke-demo-images.repository_id}/argo-cd"
           tag        = "v3.6.2"
         }
       }
@@ -63,7 +63,7 @@ resource "helm_release" "argocd" {
         }
       }
       extraObjects = [
-        yamldecode(file("${path.module}/../argocd/applications/online-boutique.yaml"))
+        yamldecode(file("${path.module}/../argo-cd/applications/online-boutique.yaml"))
       ]
     })
   ]
